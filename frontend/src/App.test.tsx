@@ -50,6 +50,7 @@ const seed = (title: string, completed = false): Todo => ({
 beforeEach(() => {
   todos = []
   shouldFail = false
+  localStorage.clear()
   vi.stubGlobal(
     "fetch",
     vi.fn((url: string, init?: RequestInit) =>
@@ -183,6 +184,19 @@ describe("App", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(
       "Could not reach the server",
     )
+  })
+
+  it("switches to dark mode with the toggle", async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    const toggle = screen.getByRole("button", { name: "Dark mode" })
+    expect(toggle).toHaveAttribute("aria-pressed", "false")
+    await user.click(toggle)
+    expect(toggle).toHaveAttribute("aria-pressed", "true")
+    expect(document.documentElement).toHaveClass("dark")
+    await user.click(toggle)
+    expect(document.documentElement).not.toHaveClass("dark")
+    expect(await screen.findByText("No todos to show.")).toBeInTheDocument()
   })
 
   it("stays in edit mode when renaming fails", async () => {
