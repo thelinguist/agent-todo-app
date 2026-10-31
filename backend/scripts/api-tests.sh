@@ -5,9 +5,8 @@ cd "$(dirname "$0")/.."
 PORT=3100 node dist/index.js &
 SERVER_PID=$!
 trap 'kill $SERVER_PID' EXIT
-for _ in $(seq 1 50); do
-  curl -s -o /dev/null "http://localhost:3100/todos" && break
-  sleep 0.1
-done
+# The server starts asynchronously, so poll until it accepts requests (up to ~5s)
+# instead of racing the first request. Fail loudly if it never comes up.
+curl -sf -o /dev/null --retry 50 --retry-delay 1 --retry-connrefused "http://localhost:3100/todos"
 cd bruno
 bunx bru run --env local
