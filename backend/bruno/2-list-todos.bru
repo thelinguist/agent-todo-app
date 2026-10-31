@@ -1,0 +1,16 @@
+meta {
+  name: List todos
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/todos
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.length: gte 1
+}

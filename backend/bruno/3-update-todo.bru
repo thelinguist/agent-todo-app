@@ -1,0 +1,20 @@
+meta {
+  name: Update todo
+  type: http
+  seq: 3
+}
+
+patch {
+  url: {{baseUrl}}/todos/{{todoId}}
+  body: json
+  auth: none
+}
+
+body:json {
+  { "completed": true }
+}
+
+assert {
+  res.status: eq 200
+  res.body.completed: eq true
+}

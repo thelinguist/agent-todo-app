@@ -1,0 +1,16 @@
+meta {
+  name: Unknown id returns 404
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{baseUrl}}/todos/does-not-exist
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 404
+  res.body.error: eq Todo not found
+}

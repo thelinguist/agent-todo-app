@@ -1,0 +1,28 @@
+{
+  "name": "@todo/backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "bun build src/index.ts --target node --outdir dist",
+    "start": "node dist/index.js",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write . --config ../prettier.config.js --ignore-path ../.prettierignore",
+    "format:check": "prettier --check . --config ../prettier.config.js --ignore-path ../.prettierignore",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --coverage",
+    "test:api": "bun run build && bash scripts/api-tests.sh"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.0",
+    "@hono/zod-validator": "^0.4.0",
+    "@todo/shared": "workspace:*",
+    "hono": "^4.6.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@usebruno/cli": "^2.0.0",
+    "tsx": "^4.19.0"
+  }
+}
