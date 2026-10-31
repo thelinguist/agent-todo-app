@@ -29,7 +29,7 @@ export const TodoForm = ({ onAdd }: TodoFormProps) => {
           setTitle(e.target.value)
         }}
         placeholder="What needs doing?"
-        className="flex-1 rounded border border-slate-300 px-3 py-2"
+        className="flex-1 rounded border border-slate-300 bg-white px-3 py-2 dark:border-slate-600 dark:bg-slate-800"
       />
       <button
         type="submit"

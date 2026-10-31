@@ -42,7 +42,7 @@ export const TodoItem = ({
             onChange={(e) => {
               setDraft(e.target.value)
             }}
-            className="flex-1 rounded border border-slate-300 px-2 py-1"
+            className="flex-1 rounded border border-slate-300 bg-white px-2 py-1 dark:border-slate-600 dark:bg-slate-800"
           />
           <button type="submit" className="rounded bg-blue-700 px-3 text-white">
             Save
@@ -52,7 +52,7 @@ export const TodoItem = ({
             onClick={() => {
               setIsEditing(false)
             }}
-            className="rounded border border-slate-300 px-3"
+            className="rounded border border-slate-300 px-3 dark:border-slate-600"
           >
             Cancel
           </button>
@@ -74,7 +74,7 @@ export const TodoItem = ({
         className="size-5"
       />
       <span
-        className={`flex-1 break-words ${todo.completed ? "text-slate-500 line-through" : ""}`}
+        className={`flex-1 break-words ${todo.completed ? "text-slate-500 line-through dark:text-slate-400" : ""}`}
       >
         {todo.title}
       </span>
@@ -82,7 +82,7 @@ export const TodoItem = ({
         type="button"
         onClick={startEditing}
         aria-label={`Edit "${todo.title}"`}
-        className="rounded border border-slate-300 px-2 py-1"
+        className="rounded border border-slate-300 px-2 py-1 dark:border-slate-600"
       >
         Edit
       </button>
@@ -92,7 +92,7 @@ export const TodoItem = ({
           onDelete(todo)
         }}
         aria-label={`Delete "${todo.title}"`}
-        className="rounded border border-red-700 px-2 py-1 text-red-700"
+        className="rounded border border-red-700 px-2 py-1 text-red-700 dark:border-red-400 dark:text-red-400"
       >
         Delete
       </button>
