@@ -10,10 +10,14 @@ type TodoListProps = {
 
 export const TodoList = ({ todos, ...handlers }: TodoListProps) => {
   if (todos.length === 0) {
-    return <p className="py-4 text-slate-600">No todos to show.</p>
+    return (
+      <p className="py-4 text-slate-600 dark:text-slate-400">
+        No todos to show.
+      </p>
+    )
   }
   return (
-    <ul className="divide-y divide-slate-200">
+    <ul className="divide-y divide-slate-200 dark:divide-slate-700">
       {todos.map((todo) => (
         <TodoItem key={todo.id} todo={todo} {...handlers} />
       ))}
