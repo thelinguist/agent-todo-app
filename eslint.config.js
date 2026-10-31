@@ -19,5 +19,5 @@ export const baseConfig = (tsconfigRootDir) => [
 
 export default [
   ...baseConfig(import.meta.dirname),
-  { ignores: ["frontend", "backend", "shared"] },
+  { ignores: ["backend", "shared"] },
 ]
