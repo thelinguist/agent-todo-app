@@ -5,3 +5,4 @@ bun.lock
 playwright-report
 test-results
 backend/src/generated
+frontend/e2e-db
