@@ -8,3 +8,7 @@ test-results
 *.tsbuildinfo
 backend/src/generated
 frontend/e2e-db
+backend/*.db
+backend/*.db-journal
+backend/*.db-wal
+backend/*.db-shm

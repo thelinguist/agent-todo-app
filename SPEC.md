@@ -30,7 +30,7 @@ Each folder is its own package with its own `package.json`.
 ## Backend (`/backend`)
 
 - Hono running on Node via `@hono/node-server`, port `3000` (override with `PORT`).
-- Persistent storage: SQLite managed through Prisma. The database file lives in `/backend` (default `file:./todos.db`, override with `DATABASE_URL`) and is not gitignored. Data survives restarts. Migrations live in `backend/prisma/migrations`.
+- Persistent storage: SQLite managed through Prisma. The database file lives in `/backend` (default `file:./todos.db`, override with `DATABASE_URL`) and is gitignored. Data survives restarts. Migrations live in `backend/prisma/migrations`.
 - Validate request bodies; return `400` with `{ "error": "<message>" }` for invalid input.
 
 ### Data model
