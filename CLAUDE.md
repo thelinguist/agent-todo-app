@@ -10,6 +10,7 @@ Read `SPEC.md` (what to build) and `STANDARDS.md` (how to write it) before doing
 
 ## Rules
 
+- Tools and Frameworks should be up to date. Especially for frameworks, check the docs and follow instructions to start optimally.
 - Don't weaken, skip, or delete tests or lint rules to make checks pass. Fix the code instead.
 - You may edit `.github/workflows/`. Explain any CI change in the PR description.
 - Don't add dependencies beyond what the spec needs. Explain each new one in the PR description.
