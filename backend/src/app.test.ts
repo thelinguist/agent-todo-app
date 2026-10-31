@@ -121,9 +121,7 @@ describe("app errors", () => {
   })
   it("returns 500 for unexpected errors", async () => {
     const broken: TodoStore = {
-      list: () => {
-        throw new Error("boom")
-      },
+      list: () => Promise.reject(new Error("boom")),
       create: vi.fn(),
       update: vi.fn(),
       remove: vi.fn(),
@@ -138,6 +136,12 @@ describe("loadConfig", () => {
   it("defaults PORT to 3000 and reads overrides", () => {
     expect(loadConfig({}).PORT).toBe(3000)
     expect(loadConfig({ PORT: "4100" }).PORT).toBe(4100)
+  })
+  it("defaults DATABASE_URL to a local sqlite file and reads overrides", () => {
+    expect(loadConfig({}).DATABASE_URL).toBe("file:./todos.db")
+    expect(loadConfig({ DATABASE_URL: "file:./x.db" }).DATABASE_URL).toBe(
+      "file:./x.db",
+    )
   })
   it("rejects invalid ports", () => {
     expect(() => loadConfig({ PORT: "abc" })).toThrow()

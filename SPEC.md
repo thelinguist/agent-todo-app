@@ -12,15 +12,17 @@ A basic single-user todo app: a React frontend talking to a Hono backend over a 
 - Filter the list: All / Active / Completed
 - Show a count of active todos
 
-Out of scope: users and auth, persistence across server restarts, due dates, tags, drag-and-drop ordering.
+Out of scope: users and auth, due dates, tags, drag-and-drop ordering.
 
 ## Repo Setup
+
 Use bun.js and create a monorepo with at least:
 
 ```
 /frontend   Vite + React + TypeScript
 /backend    Hono on Node + TypeScript
 ```
+
 These tools and other framework tools must be set up using their docs guidance, and not older versions!
 
 Each folder is its own package with its own `package.json`.
@@ -28,28 +30,28 @@ Each folder is its own package with its own `package.json`.
 ## Backend (`/backend`)
 
 - Hono running on Node via `@hono/node-server`, port `3000` (override with `PORT`).
-- In-memory storage. Data resets when the server restarts.
+- Persistent storage: SQLite managed through Prisma. The database file lives in `/backend` (default `file:./todos.db`, override with `DATABASE_URL`) and is gitignored. Data survives restarts. Migrations live in `backend/prisma/migrations`.
 - Validate request bodies; return `400` with `{ "error": "<message>" }` for invalid input.
 
 ### Data model
 
 ```ts
 type Todo = {
-  id: string;          // UUID
-  title: string;
-  completed: boolean;
-  createdAt: string;   // ISO 8601
+  id: string // UUID
+  title: string
+  completed: boolean
+  createdAt: string // ISO 8601
 }
 ```
 
 ### API
 
-| Method | Path | Body | Success |
-|---|---|---|---|
-| GET | `/todos` | none | `200` with `Todo[]`, oldest first |
-| POST | `/todos` | `{ title }` | `201` with the created `Todo` |
-| PATCH | `/todos/:id` | `{ title?, completed? }` | `200` with the updated `Todo` |
-| DELETE | `/todos/:id` | none | `204` |
+| Method | Path         | Body                     | Success                           |
+| ------ | ------------ | ------------------------ | --------------------------------- |
+| GET    | `/todos`     | none                     | `200` with `Todo[]`, oldest first |
+| POST   | `/todos`     | `{ title }`              | `201` with the created `Todo`     |
+| PATCH  | `/todos/:id` | `{ title?, completed? }` | `200` with the updated `Todo`     |
+| DELETE | `/todos/:id` | none                     | `204`                             |
 
 Unknown `id` returns `404` with `{ "error": "Todo not found" }`.
 
@@ -61,11 +63,13 @@ Unknown `id` returns `404` with `{ "error": "Todo not found" }`.
 - Usable with the keyboard: Enter adds a todo, and all controls are focusable buttons or inputs.
 
 ## Scripts (required in both packages)
+
 - testing: vitest. Frontend should also use `@testing-library/react`. Playwright tests should also exist
 - linting: eslint with common best practices and also sonarqube scanner
 - formatting: prettier with the only override: no semicolons
 
 ## Tests
+
 - Coverage must be tracked and must be 90% or better.
 - Playwright tests should execute against a local server but also a deployed version. Focus on happy path scenarios and critical functionality and let unit tests cover the rest (at least).
 
