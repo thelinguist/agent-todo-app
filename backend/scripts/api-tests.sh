@@ -5,6 +5,10 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 API_TEST_PORT="${API_TEST_PORT:-3100}"
 BASE_URL="http://localhost:${API_TEST_PORT}"
+# Use a throwaway database so API tests never touch real data.
+DB_FILE="$(mktemp -d)/api-test.db"
+export DATABASE_URL="file:$DB_FILE"
+bun run migrate
 PORT="$API_TEST_PORT" node dist/index.js &
 SERVER_PID=$!
 trap 'kill $SERVER_PID' EXIT

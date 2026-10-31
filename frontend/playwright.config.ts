@@ -2,6 +2,7 @@ import { defineConfig } from "@playwright/test"
 
 const LOCAL_URL = "http://localhost:5173"
 const baseURL = process.env["E2E_BASE_URL"] ?? LOCAL_URL
+const E2E_DB_FILE = "/tmp/todo-e2e.db"
 const isLocal = baseURL === LOCAL_URL
 
 export default defineConfig({
@@ -15,7 +16,9 @@ export default defineConfig({
   webServer: isLocal
     ? [
         {
-          command: "bun run --cwd ../backend dev",
+          // Fresh throwaway database per run so tests never see real data.
+          command: `rm -f ${E2E_DB_FILE} && bun run --cwd ../backend dev`,
+          env: { DATABASE_URL: `file:${E2E_DB_FILE}` },
           url: "http://localhost:3000/todos",
           reuseExistingServer: !process.env["CI"],
         },

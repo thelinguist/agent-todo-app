@@ -2,7 +2,11 @@
   "name": "todo-app",
   "private": true,
   "type": "module",
-  "workspaces": ["shared", "backend", "frontend"],
+  "workspaces": [
+    "shared",
+    "backend",
+    "frontend"
+  ],
   "scripts": {
     "dev": "bun run --filter '*' dev",
     "build": "bun run --filter '*' build",
@@ -25,5 +29,8 @@
     "typescript-eslint": "^8.72.1",
     "vitest": "^5.0.5",
     "@vitest/coverage-v8": "^5.0.5"
-  }
+  },
+  "trustedDependencies": [
+    "better-sqlite3"
+  ]
 }

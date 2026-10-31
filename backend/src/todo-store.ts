@@ -1,17 +1,17 @@
 import type { Todo, UpdateTodoInput } from "@todo/shared"
 
 export type TodoStore = {
-  list: () => Todo[]
-  create: (title: string) => Todo
-  update: (id: string, changes: UpdateTodoInput) => Todo | undefined
-  remove: (id: string) => boolean
+  list: () => Promise<Todo[]>
+  create: (title: string) => Promise<Todo>
+  update: (id: string, changes: UpdateTodoInput) => Promise<Todo | undefined>
+  remove: (id: string) => Promise<boolean>
 }
 
 export const createInMemoryTodoStore = (): TodoStore => {
   const todos = new Map<string, Todo>()
 
   return {
-    list: () => [...todos.values()],
+    list: () => Promise.resolve([...todos.values()]),
     create: (title) => {
       const todo: Todo = {
         id: crypto.randomUUID(),
@@ -20,9 +20,9 @@ export const createInMemoryTodoStore = (): TodoStore => {
         createdAt: new Date().toISOString(),
       }
       todos.set(todo.id, todo)
-      return todo
+      return Promise.resolve(todo)
     },
-    update: (id, changes): Todo | undefined => {
+    update: (id, changes) => {
       const existing = todos.get(id)
       const updated = existing && {
         ...existing,
@@ -32,8 +32,8 @@ export const createInMemoryTodoStore = (): TodoStore => {
         }),
       }
       if (updated) todos.set(id, updated)
-      return updated
+      return Promise.resolve(updated)
     },
-    remove: (id) => todos.delete(id),
+    remove: (id) => Promise.resolve(todos.delete(id)),
   }
 }

@@ -7,30 +7,30 @@ beforeEach(() => {
 })
 
 describe("in-memory todo store", () => {
-  it("creates and lists in insertion order", () => {
-    const a = store.create("a")
-    const b = store.create("b")
-    expect(store.list().map((t) => t.id)).toEqual([a.id, b.id])
+  it("creates and lists in insertion order", async () => {
+    const a = await store.create("a")
+    const b = await store.create("b")
+    expect((await store.list()).map((t) => t.id)).toEqual([a.id, b.id])
     expect(a.completed).toBe(false)
   })
-  it("updates title and completed independently", () => {
-    const a = store.create("a")
-    expect(store.update(a.id, { completed: true })).toMatchObject({
+  it("updates title and completed independently", async () => {
+    const a = await store.create("a")
+    expect(await store.update(a.id, { completed: true })).toMatchObject({
       title: "a",
       completed: true,
     })
-    expect(store.update(a.id, { title: "z" })).toMatchObject({
+    expect(await store.update(a.id, { title: "z" })).toMatchObject({
       title: "z",
       completed: true,
     })
   })
-  it("returns undefined when updating an unknown id", () => {
-    expect(store.update("nope", { completed: true })).toBeUndefined()
+  it("returns undefined when updating an unknown id", async () => {
+    expect(await store.update("nope", { completed: true })).toBeUndefined()
   })
-  it("removes todos", () => {
-    const a = store.create("a")
-    expect(store.remove(a.id)).toBe(true)
-    expect(store.remove(a.id)).toBe(false)
-    expect(store.list()).toEqual([])
+  it("removes todos", async () => {
+    const a = await store.create("a")
+    expect(await store.remove(a.id)).toBe(true)
+    expect(await store.remove(a.id)).toBe(false)
+    expect(await store.list()).toEqual([])
   })
 })

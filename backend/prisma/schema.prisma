@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Todo {
+  // Internal autoincrement key gives a stable insertion order ("oldest first").
+  seq       Int      @id @default(autoincrement())
+  // Public identifier exposed by the API.
+  id        String   @unique @default(uuid())
+  title     String
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+}

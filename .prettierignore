@@ -4,3 +4,4 @@ coverage
 bun.lock
 playwright-report
 test-results
+backend/src/generated

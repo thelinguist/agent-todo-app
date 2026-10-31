@@ -1,12 +1,12 @@
 # Todo app
 
-A single-user todo app: a React (Vite + Tailwind) frontend talking to a Hono backend over a JSON API. Data is stored in memory and resets when the backend restarts.
+A single-user todo app: a React (Vite + Tailwind) frontend talking to a Hono backend over a JSON API. Todos are stored in a SQLite file (`backend/todos.db`, via Prisma) and persist across restarts. Set `DATABASE_URL` to use another file.
 
-| Package     | Description                                  |
-| ----------- | -------------------------------------------- |
-| `frontend/` | Vite + React + TypeScript                    |
-| `backend/`  | Hono on Node, in-memory store, Bruno API tests |
-| `shared/`   | Zod schemas and types shared by both         |
+| Package     | Description                                          |
+| ----------- | ---------------------------------------------------- |
+| `frontend/` | Vite + React + TypeScript                            |
+| `backend/`  | Hono on Node, SQLite + Prisma store, Bruno API tests |
+| `shared/`   | Zod schemas and types shared by both                 |
 
 ## Install
 

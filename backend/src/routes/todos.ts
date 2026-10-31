@@ -20,24 +20,24 @@ const validate = <T extends ZodType>(target: "json" | "param", schema: T) =>
 
 export const createTodoRoutes = (store: TodoStore) =>
   new Hono()
-    .get("/", (c) => c.json(store.list()))
-    .post("/", validate("json", createTodoSchema), (c) => {
+    .get("/", async (c) => c.json(await store.list()))
+    .post("/", validate("json", createTodoSchema), async (c) => {
       const { title } = c.req.valid("json")
-      return c.json(store.create(title), 201)
+      return c.json(await store.create(title), 201)
     })
     .patch(
       "/:id",
       validate("param", paramSchema),
       validate("json", updateTodoSchema),
-      (c) => {
+      async (c) => {
         const { id } = c.req.valid("param")
-        const todo = store.update(id, c.req.valid("json"))
+        const todo = await store.update(id, c.req.valid("json"))
         if (!todo) throw new NotFoundError()
         return c.json(todo)
       },
     )
-    .delete("/:id", validate("param", paramSchema), (c) => {
+    .delete("/:id", validate("param", paramSchema), async (c) => {
       const { id } = c.req.valid("param")
-      if (!store.remove(id)) throw new NotFoundError()
+      if (!(await store.remove(id))) throw new NotFoundError()
       return c.body(null, 204)
     })

@@ -4,7 +4,7 @@ import sonarjs from "eslint-plugin-sonarjs"
 import prettier from "eslint-config-prettier"
 
 export const baseConfig = (tsconfigRootDir) => [
-  { ignores: ["dist", "coverage", "playwright-report", "test-results"] },
+  { ignores: ["dist", "coverage", "**/generated", "playwright-report", "test-results"] },
   js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   sonarjs.configs.recommended,
