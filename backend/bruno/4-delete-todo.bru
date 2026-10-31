@@ -1,0 +1,15 @@
+meta {
+  name: Delete todo
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/todos/{{todoId}}
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 204
+}

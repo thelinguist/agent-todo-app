@@ -1,0 +1,20 @@
+{
+  "name": "@todo/shared",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "dev": "echo 'shared: nothing to run'",
+    "build": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write . --config ../prettier.config.js --ignore-path ../.prettierignore",
+    "format:check": "prettier --check . --config ../prettier.config.js --ignore-path ../.prettierignore",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --coverage"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  }
+}

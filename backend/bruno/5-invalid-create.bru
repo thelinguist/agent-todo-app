@@ -1,0 +1,19 @@
+meta {
+  name: Invalid create returns 400
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/todos
+  body: json
+  auth: none
+}
+
+body:json {
+  { "title": "   " }
+}
+
+assert {
+  res.status: eq 400
+}
