@@ -2,7 +2,7 @@
   "name": "todo-app",
   "private": true,
   "type": "module",
-  "workspaces": ["shared", "backend"],
+  "workspaces": ["shared", "backend", "frontend"],
   "scripts": {
     "dev": "bun run --filter '*' dev",
     "build": "bun run --filter '*' build",
@@ -11,6 +11,7 @@
     "format:check": "bun run --filter '*' format:check",
     "typecheck": "bun run --filter '*' typecheck",
     "test": "bun run --filter '*' test",
+    "test:e2e": "bun run --filter @todo/frontend test:e2e",
     "test:api": "bun run --filter @todo/backend test:api"
   },
   "devDependencies": {
