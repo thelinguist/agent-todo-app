@@ -21,7 +21,7 @@ export const createApp = (store: TodoStore = createInMemoryTodoStore()) => {
 
   app.notFound((c) => c.json({ error: "Not found" }, 404))
 
-  app.onError((err, c) => {
+  app.onError((err, c): Response => {
     if (err instanceof NotFoundError) return c.json({ error: err.message }, 404)
     if (err instanceof ValidationError)
       return c.json({ error: err.message }, 400)

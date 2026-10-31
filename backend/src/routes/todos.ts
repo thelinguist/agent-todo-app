@@ -1,6 +1,6 @@
 import { Hono } from "hono"
 import { zValidator } from "@hono/zod-validator"
-import type { ZodTypeAny } from "zod"
+import type { ZodType } from "zod"
 import { z } from "zod"
 import { createTodoSchema, updateTodoSchema } from "@todo/shared"
 import { NotFoundError, ValidationError } from "../lib/errors"
@@ -9,7 +9,7 @@ import type { TodoStore } from "../todo-store"
 const paramSchema = z.object({ id: z.string().min(1) })
 
 // Throw instead of formatting responses; app.onError builds the error shape.
-const validate = <T extends ZodTypeAny>(target: "json" | "param", schema: T) =>
+const validate = <T extends ZodType>(target: "json" | "param", schema: T) =>
   zValidator(target, schema, (result) => {
     if (!result.success) {
       throw new ValidationError(

@@ -14,15 +14,15 @@
     "test:api": "bun run build && bash scripts/api-tests.sh"
   },
   "dependencies": {
-    "@hono/node-server": "^1.13.0",
-    "@hono/zod-validator": "^0.4.0",
+    "@hono/node-server": "^2.1.5",
+    "@hono/zod-validator": "^0.9.1",
     "@todo/shared": "workspace:*",
-    "hono": "^4.6.0",
-    "zod": "^3.24.0"
+    "hono": "^4.13.14",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
-    "@usebruno/cli": "^2.0.0",
-    "tsx": "^4.19.0"
+    "@types/node": "^26.6.6",
+    "@usebruno/cli": "^4.3.0",
+    "tsx": "^4.23.15"
   }
 }

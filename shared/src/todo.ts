@@ -3,16 +3,16 @@ import { z } from "zod"
 export const MAX_TITLE_LENGTH = 200
 
 export const titleSchema = z
-  .string({ required_error: "Title is required" })
+  .string({ error: "Title is required" })
   .trim()
   .min(1, "Title must be at least 1 character")
   .max(MAX_TITLE_LENGTH, `Title must be at most ${MAX_TITLE_LENGTH} characters`)
 
 export const todoSchema = z.object({
-  id: z.string().uuid(),
+  id: z.uuid(),
   title: z.string(),
   completed: z.boolean(),
-  createdAt: z.string().datetime(),
+  createdAt: z.iso.datetime(),
 })
 
 export const createTodoSchema = z.object({ title: titleSchema })

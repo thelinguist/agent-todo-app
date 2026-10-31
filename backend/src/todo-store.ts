@@ -22,17 +22,16 @@ export const createInMemoryTodoStore = (): TodoStore => {
       todos.set(todo.id, todo)
       return todo
     },
-    update: (id, changes) => {
+    update: (id, changes): Todo | undefined => {
       const existing = todos.get(id)
-      if (!existing) return undefined
-      const updated: Todo = {
+      const updated = existing && {
         ...existing,
         ...(changes.title !== undefined && { title: changes.title }),
         ...(changes.completed !== undefined && {
           completed: changes.completed,
         }),
       }
-      todos.set(id, updated)
+      if (updated) todos.set(id, updated)
       return updated
     },
     remove: (id) => todos.delete(id),
