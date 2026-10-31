@@ -95,6 +95,7 @@ Follow the Testing Pyramid:
 - Semantic commit messages: `feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `chore:`, `ci:`.
 - One topic per PR.
 - Run `format`, `lint`, `typecheck` and `test` before every commit.
+- Keep changes small and focused.
 
 ## CI
 - execute linting, formatting, building, and testing before a PR can be merged
