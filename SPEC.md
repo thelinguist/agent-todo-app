@@ -21,7 +21,7 @@ Use bun.js and create a monorepo with at least:
 /frontend   Vite + React + TypeScript
 /backend    Hono on Node + TypeScript
 ```
-Ensure the tools use the setup specified in their latest docs
+These tools and other framework tools must be set up using their docs guidance, and not older versions!
 
 Each folder is its own package with its own `package.json`.
 
